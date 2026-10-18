@@ -1,0 +1,46 @@
+{
+  "_comment": "Least-privilege execution roles, one per function. Account 111122223333 and region us-east-1 are placeholders.",
+  "mw-presign-upload": {
+    "Version": "2012-10-17",
+    "Statement": [
+      { "Effect": "Allow", "Action": "s3:PutObject", "Resource": "arn:aws:s3:::mw-documents-prod/tenants/*" },
+      { "Effect": "Allow", "Action": ["kms:GenerateDataKey", "kms:Encrypt"], "Resource": "arn:aws:kms:us-east-1:111122223333:key/*",
+        "Condition": { "StringEquals": { "aws:ResourceTag/purpose": "mw-tenant-documents" } } },
+      { "Effect": "Allow", "Action": "secretsmanager:GetSecretValue", "Resource": "arn:aws:secretsmanager:us-east-1:111122223333:secret:mw/db/app-*" }
+    ]
+  },
+  "mw-process-document": {
+    "Version": "2012-10-17",
+    "Statement": [
+      { "Effect": "Allow", "Action": ["sqs:ReceiveMessage", "sqs:DeleteMessage", "sqs:GetQueueAttributes"], "Resource": "arn:aws:sqs:us-east-1:111122223333:mw-document-ingest" },
+      { "Effect": "Allow", "Action": ["s3:GetObject", "s3:GetObjectVersion"], "Resource": "arn:aws:s3:::mw-documents-prod/tenants/*" },
+      { "Effect": "Allow", "Action": "kms:Decrypt", "Resource": "arn:aws:kms:us-east-1:111122223333:key/*",
+        "Condition": { "StringEquals": { "aws:ResourceTag/purpose": "mw-tenant-documents", "kms:ViaService": "s3.us-east-1.amazonaws.com" } } },
+      { "Effect": "Allow", "Action": ["textract:StartDocumentTextDetection", "textract:GetDocumentTextDetection"], "Resource": "*" },
+      { "Effect": "Allow", "Action": "iam:PassRole", "Resource": "arn:aws:iam::111122223333:role/mw-textract-sns" },
+      { "Effect": "Allow", "Action": ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream"],
+        "Resource": ["arn:aws:bedrock:us-east-1::foundation-model/anthropic.*", "arn:aws:bedrock:us-east-1:111122223333:inference-profile/*"] },
+      { "Effect": "Allow", "Action": "secretsmanager:GetSecretValue", "Resource": "arn:aws:secretsmanager:us-east-1:111122223333:secret:mw/db/worker-*" }
+    ]
+  },
+  "mw-search": {
+    "Version": "2012-10-17",
+    "Statement": [
+      { "Effect": "Allow", "Action": ["bedrock:InvokeModel"], "Resource": ["arn:aws:bedrock:us-east-1::foundation-model/anthropic.*", "arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-embed-text-v2*"] },
+      { "Effect": "Allow", "Action": "secretsmanager:GetSecretValue", "Resource": "arn:aws:secretsmanager:us-east-1:111122223333:secret:mw/db/app-*" }
+    ]
+  },
+  "mw-verify-deadline": {
+    "Version": "2012-10-17",
+    "Statement": [
+      { "Effect": "Allow", "Action": "secretsmanager:GetSecretValue", "Resource": "arn:aws:secretsmanager:us-east-1:111122223333:secret:mw/db/app-*" }
+    ]
+  },
+  "mw-crm-sync": {
+    "_comment": "Marketing boundary: no database, no document bucket, no Bedrock.",
+    "Version": "2012-10-17",
+    "Statement": [
+      { "Effect": "Allow", "Action": "secretsmanager:GetSecretValue", "Resource": "arn:aws:secretsmanager:us-east-1:111122223333:secret:mw/hubspot/private-app-*" }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyInsecureTransport",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": ["arn:aws:s3:::mw-documents-prod", "arn:aws:s3:::mw-documents-prod/*"],
+      "Condition": { "Bool": { "aws:SecureTransport": "false" } }
+    },
+    {
+      "Sid": "DenyUnencryptedOrWrongKeyPuts",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::mw-documents-prod/*",
+      "Condition": { "StringNotEquals": { "s3:x-amz-server-side-encryption": "aws:kms" } }
+    },
+    {
+      "Sid": "DenyAccessOutsideOwnTenantPrefix",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": ["s3:GetObject", "s3:PutObject"],
+      "NotResource": "arn:aws:s3:::mw-documents-prod/tenants/${aws:PrincipalTag/tenant_id}/*",
+      "Condition": {
+        "StringEquals": { "aws:PrincipalTag/tenant_scoped": "true" }
+      }
+    },
+    {
+      "Sid": "DenyDeleteExceptRetentionRole",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": ["s3:DeleteObject", "s3:DeleteObjectVersion"],
+      "Resource": "arn:aws:s3:::mw-documents-prod/*",
+      "Condition": { "ArnNotEquals": { "aws:PrincipalArn": "arn:aws:iam::111122223333:role/mw-retention-disposition" } }
+    }
+  ]
+}
