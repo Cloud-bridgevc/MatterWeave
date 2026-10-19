@@ -1,0 +1,8 @@
+# Vite 5 cannot be auto-configured as a Worker. Publish the static build
+# and let the client router handle unknown paths.
+name = "matterweave"
+compatibility_date = "2026-03-01"
+
+[assets]
+directory = "./dist"
+not_found_handling = "single-page-application"
