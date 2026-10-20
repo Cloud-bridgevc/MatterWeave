@@ -2,6 +2,8 @@
 
 AI-native legal matter coordination and document intelligence for law firms and corporate legal departments.
 
+Website: https://matterweave.site · LinkedIn: https://www.linkedin.com/company/matterweave/
+
 > **Demonstration build.** All matters, people, organizations and documents are fictional. AI output is assistance for administrative coordination and document review — not legal advice. MatterWeave never files documents and never treats an AI-identified date as a deadline until authorized legal staff verify it.
 
 ## What's here

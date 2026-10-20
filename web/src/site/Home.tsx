@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Icon } from '../components/ui';
+import { TeamSection } from './Team';
 
 const features = [
   { icon: 'file', title: 'Matter document intelligence', body: 'Extract parties, dates, references, amounts and key passages from pleadings, orders, agreements and notices — every item linked to the paragraph it came from.' },
@@ -33,18 +34,6 @@ export default function Home() {
             </div>
           </div>
           <HeroPreview />
-        </div>
-      </section>
-
-      <section className="section" style={{ paddingTop: 48, paddingBottom: 48 }}>
-        <div className="container">
-          <div className="row wrap" style={{ justifyContent: 'space-between', gap: 24 }}>
-            <span className="muted small" style={{ letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 600 }}>Designed for teams like</span>
-            <div className="logos">
-              <span>Vance Hale &amp; Partners</span><span>Northvale Bio</span><span>Ashgrove LLP</span><span>Merrow Industrial</span><span>Calder &amp; Finch</span>
-            </div>
-          </div>
-          <p className="small muted" style={{ marginTop: 10 }}>Illustrative, fictional organizations.</p>
         </div>
       </section>
 
@@ -143,7 +132,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" style={{ paddingTop: 0 }}>
+      <TeamSection alt />
+
+      <section className="section">
         <div className="container">
           <div className="cta-band">
             <div>

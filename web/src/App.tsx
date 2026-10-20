@@ -7,6 +7,7 @@ import Solutions from './site/Solutions';
 import Pricing from './site/Pricing';
 import Security from './site/Security';
 import Demo from './site/Demo';
+import About from './site/About';
 import AppLayout from './app/AppLayout';
 import Dashboard from './app/Dashboard';
 import Matters from './app/Matters';
@@ -19,10 +20,12 @@ import AuditPage from './app/AuditPage';
 import DocumentLibrary from './app/DocumentLibrary';
 
 function ScrollTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    const target = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+    if (target) target.scrollIntoView();
+    else window.scrollTo(0, 0);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -39,6 +42,7 @@ export default function App() {
           <Route path="pricing" element={<Pricing />} />
           <Route path="security" element={<Security />} />
           <Route path="demo" element={<Demo />} />
+          <Route path="about" element={<About />} />
         </Route>
         <Route path="app" element={<AppLayout />}>
           <Route index element={<Dashboard />} />
