@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Icon } from '../components/ui';
 import { TeamSection } from './Team';
+import { GlowTop, GlowMid, GlowEnd } from './Glow';
 
 const features = [
   { icon: 'file', title: 'Matter document intelligence', body: 'Extract parties, dates, references, amounts and key passages from pleadings, orders, agreements and notices — every item linked to the paragraph it came from.' },
@@ -36,6 +37,8 @@ export default function Home() {
           <HeroPreview />
         </div>
       </section>
+
+      <GlowTop />
 
       <section className="section alt">
         <div className="container">
@@ -90,6 +93,8 @@ export default function Home() {
         </div>
       </section>
 
+      <GlowMid />
+
       <section className="section dark">
         <div className="container">
           <div className="section-head">
@@ -133,6 +138,7 @@ export default function Home() {
       </section>
 
       <TeamSection alt />
+      <GlowEnd />
 
       <section className="section">
         <div className="container">

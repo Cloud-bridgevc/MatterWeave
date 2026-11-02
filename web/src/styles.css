@@ -337,6 +337,15 @@ table.data tr.clickable:hover td { background: #fcfbf9; cursor: pointer; }
   .cal .ev { font-size: 10px; }
   .cta-band { padding: 28px; }
   .site-footer .cols { grid-template-columns: 1fr; }
+  .grid-3, .grid-2, .grid-4, .form-grid, .two-col { grid-template-columns: minmax(0, 1fr); }
+  .page-title > *, .two-col > *, .panel, .form-grid > *, .field, .input { min-width: 0; }
+  .panel-head { flex-wrap: wrap; }
+  .stack > * { min-width: 0; }
+  .content, .main { min-width: 0; }
+  .page-title .row { flex-wrap: wrap; }
+  .board { overflow-x: auto; }
+  .card .data { display: block; overflow-x: auto; }
+  .panel-head .input { max-width: 100%; }
 }
 
-section[id] { scroll-margin-top: 68px; }
+section[id] { scroll-margin-top: 84px; }

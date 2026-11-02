@@ -46,3 +46,17 @@ Demo state persists in your browser's local storage; use **Reset demo** in the s
 ## Production AI path
 
 `infra/lambda/src/shared/bedrock.ts` calls Claude on Amazon Bedrock (`anthropic.claude-opus-5-5`, override with `BEDROCK_MODEL_ID`) using structured outputs, then re-validates that every citation references a real paragraph. Candidate dates are inserted with `status = 'candidate'`; only the `verify-deadline` endpoint (guarded by a database trigger restricted to partner/attorney/paralegal roles) can make them `verified`.
+
+## Launch readiness (glow-up)
+
+- Website (`web/`): problem section with three sourced statistics, what-we-solve, comparison table, AI section, founder cards, roadmap and FAQ, with scroll-reveal motion that respects reduced motion. Sections live in `web/src/site/Glow.tsx` (generated markup); styles and motion in `web/public/glow.css` and `web/public/glow.js`.
+- New routes: `/privacy`, `/terms` (review drafts). Footer credits the founders.
+- Hosting: `web/vercel.json` now rewrites deep links to `index.html` (the app uses browser routing) and adds security headers; `web/public/_redirects` and `_headers` do the same on Netlify/Cloudflare Pages.
+- Ship assets in `web/public/`: favicon, OG image, icons, manifest, sitemap (with lastmod), founders JSON-LD in `web/index.html`.
+- Fixed horizontal overflow on phones (demo form, matters, tasks board).
+
+### Content to confirm before launch
+- Contact email `hello@matterweave.site` is a placeholder — create the forward or replace it.
+- Statistics (ABA Profile of Legal Malpractice Claims 2020–2023 via Lawyers Mutual NC; Clio Legal Trends 2024) — re-check figures and links.
+- Founder bios describe roles only; replace with confirmed biographies.
+- Privacy notice and terms need operator details and governing law.

@@ -12,6 +12,7 @@ export default function SiteLayout() {
         <div className="container inner">
           <Link to="/" style={{ textDecoration: 'none' }}><Logo /></Link>
           <nav className="site-nav" onClick={() => setOpen(false)}>
+            <a href="/#problem">Problem</a>
             <NavLink to="/platform">Platform</NavLink>
             <NavLink to="/solutions/law-firms" className={() => (loc.pathname === '/solutions/law-firms' ? 'active' : '')}>Law Firms</NavLink>
             <NavLink to="/solutions/corporate-legal" className={() => (loc.pathname === '/solutions/corporate-legal' ? 'active' : '')}>Corporate Legal</NavLink>
@@ -61,12 +62,14 @@ export default function SiteLayout() {
               <Link to="/security">Security & privacy</Link>
               <Link to="/security#ai">Responsible AI</Link>
               <Link to="/demo">Contact sales</Link>
+              <Link to="/privacy">Privacy</Link>
+              <Link to="/terms">Terms</Link>
             </div>
           </div>
           <div className="legal">
             MatterWeave supports administrative coordination and document review. It does not provide legal advice, does not file documents with any court or agency,
             and does not make deadline determinations — all AI-identified dates require verification by authorized legal staff. Customer names and
-            matters shown on this site are fictional. © 2026 MatterWeave · matterweave.site
+            matters shown on this site are fictional. © 2026 MatterWeave · matterweave.site · Founded by Bello Adam (Founder/CEO) &amp; Chinedu Justice (Co-founder/CTO)
           </div>
         </div>
       </footer>

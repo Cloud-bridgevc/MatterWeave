@@ -8,6 +8,7 @@ import Pricing from './site/Pricing';
 import Security from './site/Security';
 import Demo from './site/Demo';
 import About from './site/About';
+import { GlowPrivacy, GlowTerms } from './site/Glow';
 import AppLayout from './app/AppLayout';
 import Dashboard from './app/Dashboard';
 import Matters from './app/Matters';
@@ -43,6 +44,8 @@ export default function App() {
           <Route path="security" element={<Security />} />
           <Route path="demo" element={<Demo />} />
           <Route path="about" element={<About />} />
+          <Route path="privacy" element={<GlowPrivacy />} />
+          <Route path="terms" element={<GlowTerms />} />
         </Route>
         <Route path="app" element={<AppLayout />}>
           <Route index element={<Dashboard />} />
